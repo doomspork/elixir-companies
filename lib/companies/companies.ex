@@ -92,14 +92,18 @@ defmodule Companies.Companies do
   ** (Ecto.NoResultsError)
 
   """
-  def get!(id, opts \\ []) do
+  def get!(key, opts \\ []) do
     preloads = Keyword.get(opts, :preloads, [])
 
-    from(c in Company)
-    |> preload(^preloads)
-    |> from()
-    |> where([c], is_nil(c.removed_pending_change_id))
-    |> Repo.get!(id)
+    query = from(c in Company) |> preload(^preloads) |> from() |> where([c], is_nil(c.removed_pending_change_id))
+
+    final_query =
+      case Integer.parse(key) do
+        :error -> where(query, [c], c.slug == ^key)
+        {int_id, _remainder} -> where(query, [c], c.id == ^int_id or c.slug == ^key)
+      end
+
+    Repo.one!(final_query)
   end
 
   @doc """
