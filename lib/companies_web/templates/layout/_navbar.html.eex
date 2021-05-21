@@ -1,0 +1,80 @@
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div x-data="{ isOpen: false }" class="relative bg-gray-50">
+  <div class="relative bg-white shadow">
+    <div class="px-4 mx-auto max-w-7xl sm:px-6">
+      <div class="flex items-center justify-between py-6 md:justify-start md:space-x-10">
+        <div class="flex justify-start lg:w-0 lg:flex-1">
+          <a href="#">
+            <span class="sr-only">Elixir Companies</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-auto h-8 text-brand-purple sm:h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          </a>
+        </div>
+        <div class="-my-2 -mr-2 md:hidden">
+          <button type="button" @click="isOpen = true" class="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
+            <span class="sr-only">Open menu</span>
+            <!-- Heroicon name: outline/menu -->
+            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+        <nav class="hidden md:flex space-x-10">
+          <%= link(gettext("Home"), to: Routes.page_path(@conn, :index, current_locale()), class: "text-base font-medium text-gray-700 hover:text-brand-purple") %>
+
+          <%= link(gettext("Companies"), to: Routes.company_path(@conn, :index, current_locale()), class: "text-base font-medium text-gray-700 hover:text-brand-purple") %>
+
+          <%= link(gettext("Jobs"), to: Routes.job_path(@conn, :index, current_locale()), class: "text-base font-medium text-gray-700 hover:text-brand-purple") %>
+
+          <%= link(gettext("Developers For Hire"), to: Routes.for_hire_path(@conn, :index, current_locale()), class: "text-base font-medium text-gray-700 hover:text-brand-purple") %>
+        </nav>
+        <div class="items-center justify-end hidden md:flex md:flex-1 lg:w-0">
+        </div>
+      </div>
+    </div>
+
+    <div
+      x-show="isOpen"
+      x-transition:enter="duration-200 ease-out"
+      x-transition:enter-start="opacity-0 scale-95"
+      x-transition:enter-end="opacity-100 scale-100"
+      x-transition:leave="duration-100 ease-in"
+      x-transition:leave-start="opacity-100 scale-100"
+      x-transition:leave-end="opacity-0 scale-95"
+      class="absolute inset-x-0 top-0 z-10 p-2 transition transform origin-top-right">
+      <div class="bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 divide-y-2 divide-gray-50">
+        <div class="px-5 pt-5 pb-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-auto h-8 text-brand-purple sm:h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <div class="-mr-2">
+              <button type="button" @click="isOpen = false" class="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                <span class="sr-only">Close menu</span>
+                <!-- Heroicon name: outline/x -->
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="mt-6">
+            <nav class="grid gap-y-8">
+              <%= link(gettext("Home"), to: Routes.page_path(@conn, :index, current_locale()), class: "text-base font-medium text-gray-700 hover:text-brand-purple") %>
+
+              <a href="#" class="text-base font-medium text-gray-700 hover:text-brand-purple">
+                Companies
+              </a>
+
+              <%= link(gettext("Jobs"), to: Routes.job_path(@conn, :index, current_locale()), class: "text-base font-medium text-gray-700 hover:text-brand-purple") %>
+
+              <%= link(gettext("Developers For Hire"), to: Routes.for_hire_path(@conn, :index, current_locale()), class: "text-base font-medium text-gray-700 hover:text-brand-purple") %>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
